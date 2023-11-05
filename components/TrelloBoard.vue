@@ -62,7 +62,8 @@ const alt = useKeyModifier('Alt')
           </template>
         </draggable>
         <footer>
-          <button class="text-gray-500">+ Add a Card</button>
+          <!-- <button class="text-gray-500">+ Add a Card</button> -->
+          <NewTask @add="task => column.tasks.push(task)" />
         </footer>
       </div>
     </template>
