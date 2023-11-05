@@ -2,7 +2,8 @@
 import type { Column, Task } from '@/types/Column'
 import { nanoid } from 'nanoid'
 import draggable from 'vuedraggable'
-const columns = ref<Column[]>([
+// https://vueuse.org/core/useLocalStorage/
+const columns = useLocalStorage<Column[]>("vueTrelloBoard", [
   {
     id: nanoid(),
     title: 'Backlog',
@@ -32,6 +33,12 @@ const columns = ref<Column[]>([
   { id: nanoid(), title: 'Done', tasks: [] },
 ]) //Nuxt injects ref automatically
 const alt = useKeyModifier('Alt')
+
+// if there was a backend, we could watch columns and sync to the backend
+// watch(columns, (columns) => {
+//   console.log('columns changed', columns)
+//   // request here
+// }, { deep: true }) // deep: true is needed to watch nested properties
 
 function createColumn() {
   const newColumn: Column = {
